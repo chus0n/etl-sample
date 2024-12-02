@@ -20,14 +20,14 @@ class CSVImporter:
         except Exception as e:
             print(f"データベースへのインポートエラー: {e}")
 
-    def read_csv(self, file_path):
+    def read_csv(self, file_path, chunksize=None, dtype=None):
         """
         CSVファイルを読み込む
         """
         try:
-            df = pd.read_csv(file_path)
-            print(f"CSVファイル '{file_path}' を読み込みました。")
-            return df
+            for df in pd.read_csv(file_path, low_memory=False, chunksize=chunksize, dtype=dtype):
+                print(f"CSVファイル '{file_path}' を読み込みました。")
+                yield df
         except Exception as e:
             print(f"CSV読み込みエラー: {e}")
-            return None
+            yield None
