@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0  # Dockerfileを使用する場合は 'build: .' に置き換え
+    container_name: mysql_container
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password  # ルートユーザーのパスワード
+      MYSQL_DATABASE: test_db             # デフォルトで作成されるデータベース
+      MYSQL_USER: test_user               # ユーザー名
+      MYSQL_PASSWORD: test_password       # ユーザーのパスワード
+    volumes:
+      - mysql_data:/var/lib/mysql         # 永続化のためのボリューム
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf                       # 設定ファイル（省略可）
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql  # 初期化スクリプト（省略可）
+
+volumes:
+  mysql_data:
