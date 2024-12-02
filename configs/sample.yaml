@@ -1,0 +1,9 @@
+fillna_values:
+  column1: "default_value"
+  column2: 0
+dtypes:
+  column1: "str"
+  column2: "numeric"
+  column3: "datetime"
+filters:
+  column2: "column2 > 0"
