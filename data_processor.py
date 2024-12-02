@@ -28,5 +28,5 @@ class DataProcessor:
             for column, condition in self.config['filters'].items():
                 df = df.query(condition)
 
-        df = df.dropna()  # NaNが残っている行を削除
+        # df = df.dropna()  # NaNが残っている行を削除
         return df
