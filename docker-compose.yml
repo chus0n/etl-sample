@@ -14,6 +14,7 @@ services:
       - mysql_data:/var/lib/mysql         # 永続化のためのボリューム
       - ./docker/mysql/my.cnf:/etc/mysql/my.cnf                       # 設定ファイル（省略可）
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql  # 初期化スクリプト（省略可）
+      - ./data:/data
 
 volumes:
   mysql_data:

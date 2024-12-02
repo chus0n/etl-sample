@@ -33,15 +33,15 @@ def process_csv_files(file_table_map):
         processor = DataProcessor(config)
 
         # CSVを読み込み、処理してインポート
-        df = importer.read_csv(file_path)
-        if df is not None:
-            clean_df = processor.clean_data(df)
-            importer.import_to_database(clean_df, table_name)
+        for df in importer.read_csv(file_path, 10000, config.get('dtypes', {})):
+            if df is not None:
+                clean_df = processor.clean_data(df)
+                importer.import_to_database(clean_df, table_name)
 
 # メイン処理
 if __name__ == '__main__':
     file_table_map = {
-        './sample.csv': 'sample',
+        './data/sample.csv': 'sample',
     }
 
     process_csv_files(file_table_map)
