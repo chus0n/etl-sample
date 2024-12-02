@@ -1,6 +1,6 @@
 services:
   mysql:
-    image: mysql:8.0  # Dockerfileを使用する場合は 'build: .' に置き換え
+    image: mysql:8.0
     container_name: mysql_container
     ports:
       - "3306:3306"
@@ -11,9 +11,9 @@ services:
       MYSQL_PASSWORD: test_password       # ユーザーのパスワード
     volumes:
       - mysql_data:/var/lib/mysql         # 永続化のためのボリューム
-      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf                       # 設定ファイル（省略可）
-      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql  # 初期化スクリプト（省略可）
-      - ./data:/data
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf                       # 設定ファイル
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql  # 初期化スクリプト
+      - ./data:/data                                                  # 取り込み用フォルダ
 
 volumes:
   mysql_data:
